@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import { MainContext } from './context'
+import Footer from './components/Footer';
+import Header from './components/Header'
 
 function App() {
+  const [logoText, setLogoText] = useState('yucelSarikaya.net');
+  const [theme, setTheme] = useState('light')
+
+  useEffect(() => {
+    document.body.className = theme
+  }, [theme])
+
+
+  const data = {
+    theme,
+    setTheme,
+    logoText,
+    setLogoText
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MainContext.Provider value={data}>
+      <Header />
+      <Footer />
+    </MainContext.Provider>
   );
 }
 
